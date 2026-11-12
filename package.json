@@ -1,7 +1,7 @@
 {
-  "name": "temazon",
+  "name": "enbi",
   "version": "1.0.0",
-  "description": "Temazon storefront with MongoDB storage and Stripe Checkout",
+  "description": "Enbi storefront with MongoDB storage and Stripe Checkout",
   "main": "server.js",
   "scripts": {
     "test": "node --test",

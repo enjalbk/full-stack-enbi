@@ -1,5 +1,5 @@
 ﻿'use strict';
-const {request,escape:escapeHtml,money,image}=window.Temazon;
+const {request,escape:escapeHtml,money,image}=window.Enbi;
 const message=document.getElementById('admin-message');
 const form=document.getElementById('product-editor');
 let products=[];let editing=null;let imageId=null;let uploading=false;

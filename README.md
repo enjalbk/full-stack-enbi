@@ -1,4 +1,4 @@
-﻿# Temazon
+﻿# Enbi
 
 A storefront with an Express API, MongoDB data, and Stripe-hosted Checkout.
 
@@ -41,12 +41,14 @@ PORT=8080
 NODE_ENV=development
 APP_URL=http://localhost:8080
 MONGODB_URI=mongodb+srv://YOUR_USER:YOUR_ENCODED_PASSWORD@YOUR_CLUSTER/
-MONGODB_DB=temazon
+MONGODB_DB=enbi
 STRIPE_SECRET_KEY=YOUR_STRIPE_TEST_SECRET_KEY
 STRIPE_WEBHOOK_SECRET=YOUR_WEBHOOK_SIGNING_SECRET
 ```
 
 For Atlas, create a database user, allow your development IP in Network Access, and use the provided Node.js connection string. Percent-encode special characters in the username/password. `MONGODB_DB` selects the application's database explicitly.
+
+For an existing deployment, keep the current `MONGODB_DB` value to retain products, accounts, carts, and orders. The Enbi rename preserves internal session cookies, JWT claims, request headers, service namespaces, and payment idempotency identifiers for compatibility.
 
 For local MongoDB, configure a replica set and use a URI such as `mongodb://127.0.0.1:27017/?replicaSet=rs0`. Standalone MongoDB is rejected because inventory and checkout need multi-document transactions.
 

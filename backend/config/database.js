@@ -3,7 +3,7 @@ const {MongoClient} = require('mongodb');
 const seed = require('../data/products');
 const {createStore}=require('../models/store');
 async function openDatabase({uri=process.env.MONGODB_URI,databaseName=process.env.MONGODB_DB || 'temazon'}={}) {
-  if (!uri) throw new Error('MONGODB_URI is required. Set it in .env before starting Temazon.');
+  if (!uri) throw new Error('MONGODB_URI is required. Set it in .env before starting Enbi.');
   const client=new MongoClient(uri,{serverSelectionTimeoutMS:10000});
   try {
     await client.connect();

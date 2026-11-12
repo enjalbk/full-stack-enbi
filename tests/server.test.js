@@ -8,7 +8,7 @@ const { getServerConfig } = require('../backend/config/environment');
 const logger = { info() {}, error() {} };
 
 function testApp(onClose = async () => {}) {
-  const app = (req, res) => res.end('Temazon test server');
+  const app = (req, res) => res.end('Enbi test server');
   app.locals = { close: onClose };
   return app;
 }
@@ -42,7 +42,7 @@ test('server starts, serves requests, and shuts down exactly once', async t => {
   t.after(() => running.shutdown());
 
   const response = await fetch(`http://127.0.0.1:${running.server.address().port}`);
-  assert.equal(await response.text(), 'Temazon test server');
+  assert.equal(await response.text(), 'Enbi test server');
   assert.equal(process.listenerCount('SIGTERM'), originalListeners + 1);
 
   const first = running.shutdown();

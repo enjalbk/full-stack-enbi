@@ -1,5 +1,5 @@
 ﻿'use strict';
-window.Temazon={
+window.Enbi={
  async request(url,options={}) {
   const upload=options.body instanceof FormData;
   const response=await fetch(url,{credentials:'same-origin',...options,headers:{...(upload?{}:{'Content-Type':'application/json'}),'X-Temazon-Request':'1',...options.headers}});

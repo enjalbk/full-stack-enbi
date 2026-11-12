@@ -23,7 +23,7 @@ async function main() {
     } else if (safePrefixes.some(prefix => error.message?.startsWith(prefix))) {
       console.error(error.message);
     } else {
-      console.error('Unable to start Temazon. Check .env, service credentials, and database connectivity.');
+      console.error('Unable to start Enbi. Check .env, service credentials, and database connectivity.');
     }
 
     process.exitCode = 1;

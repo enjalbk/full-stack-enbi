@@ -1,5 +1,5 @@
 ﻿'use strict';
-const {request,escape:escapeHtml,money}=window.Temazon;
+const {request,escape:escapeHtml,money}=window.Enbi;
 const message=document.getElementById('account-message');
 let googleClient=null;
 let currentUser=null;

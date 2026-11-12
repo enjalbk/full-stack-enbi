@@ -32,7 +32,7 @@ async function startServer({
     if (shutdownPromise) return shutdownPromise;
 
     shutdownPromise = (async () => {
-      logger.info(`Shutting down Temazon (${reason})...`);
+      logger.info(`Shutting down Enbi (${reason})...`);
 
       // Bound shutdown so hanging requests or database connections cannot keep it alive forever.
       const timeout = setTimeout(() => {
@@ -91,7 +91,7 @@ async function startServer({
   const address = server.address();
   const displayHost = config.host === '0.0.0.0' ? 'localhost' : config.host;
   const urlHost = displayHost.includes(':') ? `[${displayHost}]` : displayHost;
-  logger.info(`Temazon is running on http://${urlHost}:${address.port}`);
+  logger.info(`Enbi is running on http://${urlHost}:${address.port}`);
 
   return { app, server, shutdown };
 }

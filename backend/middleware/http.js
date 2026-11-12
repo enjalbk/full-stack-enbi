@@ -8,7 +8,7 @@ function securityHeaders(req,res,next) {
 function protectApi(req,res,next) {
   res.set('Cache-Control','no-store');
   if(!['GET','HEAD','OPTIONS'].includes(req.method)) {
-    if(req.get('X-Temazon-Request')!=='1' || req.get('Sec-Fetch-Site')==='cross-site') return res.status(403).json({error:'Please make this request from the Temazon storefront.'});
+    if(req.get('X-Temazon-Request')!=='1' || req.get('Sec-Fetch-Site')==='cross-site') return res.status(403).json({error:'Please make this request from the Enbi storefront.'});
     const isImageUpload=req.path==='/admin/images' && req.method==='POST' && req.is('multipart/form-data');
     if(!req.is('application/json') && !isImageUpload) return res.status(415).json({error:'Use application/json.'});
   }
