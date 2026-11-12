@@ -275,7 +275,7 @@ test('admin uploads, product CRUD, optimistic stock edits and archive protect ch
  const cloud=testCloudinary();const f=await fixture(t,{cloudinary:cloud});const admin=await adminClient(f);const outsider=f.client();
  assert.equal((await upload(outsider)).status,401);assert.equal(cloud.calls,0);
  assert.equal((await upload(admin,Buffer.from('<svg>not an image</svg>'),'fake.png')).status,400);
- assert.equal((await upload(admin,Buffer.alloc(5*1024*1024+1))).status,413);
+ assert.equal((await upload(admin,Buffer.alloc(4*1024*1024+1))).status,413);
  const uploaded=await upload(admin);assert.equal(uploaded.status,201,JSON.stringify(uploaded.data));assert.equal(cloud.calls,1);
  const input={name:'Desk plant <script>',description:'A little greenery.',category:'Home & Living',priceCents:2499,stock:10,imageId:uploaded.data.image.id};
  const result=await admin.request('/api/admin/products','POST',input);assert.equal(result.status,201,JSON.stringify(result.data));const product=result.data.product;assert.equal(product.id,9);assert.match(product.imageUrl,/res\.cloudinary\.com/);

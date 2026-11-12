@@ -14,7 +14,7 @@ function adminRoutes(controller,{cloudinary}) {
   router.get('/users',controller.listUsers);
   router.get('/orders',controller.listOrders);
   router.patch('/orders/:id',controller.updateOrder);
-  const upload=multer({storage:multer.memoryStorage(),limits:{fileSize:5*1024*1024,files:1,fields:0,parts:1}});
+  const upload=multer({storage:multer.memoryStorage(),limits:{fileSize:4*1024*1024,files:1,fields:0,parts:1}});
   const configured=(req,res,next)=>{
     if(!cloudinary) fail(503,'Cloudinary is not configured. Add Cloudinary settings to .env.');
     next();

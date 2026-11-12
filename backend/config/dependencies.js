@@ -4,7 +4,7 @@ const {openDatabase}=require('./database');
 const {firebaseSettings,openCache,cloudinaryService}=require('./integrations');
 const {createPayments}=require('../services/paymentService');
 async function createDependencies(options={}) {
-  const origin=options.origin || process.env.APP_URL || 'http://localhost:8080';
+  const origin=options.origin || process.env.APP_URL || (process.env.VERCEL_URL ? `https://${process.env.VERCEL_URL}` : 'http://localhost:8080');
   const url=new URL(origin);
   if(!['http:','https:'].includes(url.protocol) || url.origin!==origin) throw new Error('APP_URL must be an origin such as http://localhost:8080, without a trailing slash.');
   const jwtSecret=options.jwtSecret ?? process.env.JWT_SECRET;

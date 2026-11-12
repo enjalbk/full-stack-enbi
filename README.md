@@ -54,6 +54,14 @@ For local MongoDB, configure a replica set and use a URI such as `mongodb://127.
 
 `APP_URL` is the trusted storefront origin used for Stripe return URLs. It must have no trailing slash. Match it to your actual port or deployed HTTPS URL. Production mode enables Secure session cookies and requires HTTPS.
 
+## Deploy to Vercel
+
+Import this repository into Vercel and deploy it as a Node.js project from the repository root. `api/index.js` adapts the Express app to Vercel Functions, while `vercel.json` sends app routes to it; files in `public/` remain static assets.
+
+In the Vercel project settings, add `MONGODB_URI` and `MONGODB_DB` (keep the existing database name if migrating data), plus a randomly generated `JWT_SECRET` of at least 32 bytes. Set `APP_URL` to your public HTTPS origin, without a trailing slash, especially when using a custom domain. If `APP_URL` is omitted, the app uses Vercel's deployment URL. Add `STRIPE_SECRET_KEY` and `STRIPE_WEBHOOK_SECRET` to enable checkout, and set the Stripe webhook endpoint to `https://YOUR_DOMAIN/api/stripe/webhook`. Add optional Firebase, Redis, and Cloudinary settings only when using those integrations. Set secrets for Production, Preview, and Development environments as needed; never commit `.env`.
+
+Vercel Functions limit request payload size, so administrator image uploads are limited to 4 MB to leave room for multipart encoding. MongoDB must be reachable from Vercel and support replica-set transactions (MongoDB Atlas is recommended).
+
 ```powershell
 npm.cmd start
 ```
@@ -190,7 +198,7 @@ With no Redis URL, caching is disabled. An unavailable Redis service falls back 
 
 Set `CLOUDINARY_CLOUD_NAME`, `CLOUDINARY_API_KEY`, and `CLOUDINARY_API_SECRET` in `.env`. In the admin product editor, select an image and press **Upload image**, then save the product.
 
-Only administrators can upload. The server accepts one PNG, JPEG or WebP image up to 5 MB, checks the file signature and uses Cloudinary's signed server-side upload. Cloudinary validates/decodes the image and limits it to 1600 x 1600. The returned HTTPS URL and public ID are saved as a MongoDB media record. Product creation references the saved media ID; arbitrary URL fetching is not supported. Existing starter Unsplash images remain until replaced.
+Only administrators can upload. The server accepts one PNG, JPEG or WebP image up to 4 MB, checks the file signature and uses Cloudinary's signed server-side upload. Cloudinary validates/decodes the image and limits it to 1600 x 1600. The returned HTTPS URL and public ID are saved as a MongoDB media record. Product creation references the saved media ID; arbitrary URL fetching is not supported. Existing starter Unsplash images remain until replaced.
 
 The UI uses the saved Cloudinary URL for uploaded products. Archiving a product preserves its media and historical order snapshots. Unused uploads are not automatically deleted; manage orphaned assets in Cloudinary as needed. Cloudinary credentials are never sent to the browser.
 
